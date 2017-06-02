@@ -1,0 +1,15 @@
+{
+  "name": "game_of_things",
+  "version": "0.0.0",
+  "description": "App for playing the Game of Things",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Micah Stamper",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "semantic-ui": "^2.2.10"
+  }
+}
