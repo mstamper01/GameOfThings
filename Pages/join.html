@@ -1,0 +1,31 @@
+<html>
+<link rel="stylesheet" href="../semantic/dist/semantic.min.css">
+<link rel="stylesheet" href="../semantic/dist/semantic.min.js">
+
+<script src="/angular/angular.min.js"></script>
+<script src="/scripts/join/joinCtrl.js"></script>
+<style>
+body{
+        background-image: url('../pics/things_background.jpg');
+        background-size: 100% 200%;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<body ng-app="joinGame" ng-controller="startJoining">
+    <img class="ui small image" id="logo" src="../pics/things_logo.png">
+    <div class="ui two columned inverted centered grid">
+      <form class="ui for raised padded segment">
+          <h4 class ="ui dividing header">Select Player</h4>
+          <div class = "one field">
+            <select class="ui dropdown" ng-model="playerSelect" ng-options="player.name for player in selectedPlayers"></select>
+          </div>
+          <div class="one padded field">
+          <button ng-click="JoinGame()" class="ui form olive green button">
+              Join Game!
+          </button>
+        </div>
+      </form>
+    </div>
+</body>
+</html>

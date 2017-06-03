@@ -27,7 +27,9 @@ gameApp.controller('gameCreator', function($scope,$http){
     if(flag)
     {
       alert("Creating game!");
-      console.log(players);
+      $http.post('http://localhost:3000/api/game', players, []).success(function(){
+          window.location.href='/game';
+      });
     }
     else{
       alert("Make sure every players name is filled in!");
