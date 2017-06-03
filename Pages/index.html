@@ -1,7 +1,8 @@
 <html>
 <link rel="stylesheet" href="../semantic/dist/semantic.min.css">
 <link rel="stylesheet" href="../semantic/dist/semantic.min.js">
-<script src="../angular/angular.min.js"></script>
+<script src="/angular/angular.min.js"></script>
+<script src="/scripts/mainPage/myCtrl.js"></script>
 <style>
   body{
           background-image: url('../pics/things_background.jpg');
@@ -15,7 +16,7 @@
 </style>
   <title>Game of Things</title>
 
-  <body ng-app="gameApp">
+  <body ng-app="gameApp" ng-controller="gameCreator">
     <img id="logo" src="../pics/things_logo.png">
     <div class="ui two columned inverted centered grid">
       <div class="ui form raised padded segment">
@@ -29,13 +30,13 @@
           <label>Please enter the players name in the order they are sitting (and select a reader to start):</label>
         <table class="ui striped selectable table" id="playersTable">
           <tr class="center aligned"><th>#</th><th>Name</th><th>Reader</th></tr>
-          <tr class="center aligned">
+          <tr id="player1row" class="center aligned">
             <td>1</td>
-            <td><div class="ui left icon input"><input id="player1" type="text" placeholder="Player 1"/><i class="add user icon"></i></div></td>
-            <td><input name="reader" type="radio" checked="checked" value=""/></td>
+            <td><div id="player1div" class="ui left icon input"><input id="player1" type="text" placeholder="Player 1"/><i class="add user icon"></i></div></td>
+            <td><input name="reader" id="player1reader" type="radio" checked="checked" value=""/></td>
         </table>
       </div>
-      <button class="ui olive button">
+      <button class="ui olive button" ng-click="createGame()" >
           Play Game!
       </button>
     </div>
@@ -55,16 +56,17 @@
               for(var i = currentNum+1; i<=numOfPlayers; i++)
               {
                   var row = playersTable.insertRow(playersTable.rows.length);
-                  row.className="center aligned"
+                  row.className="center aligned";
+                  row.id="player"+i+"row";
 
                   var playerNum = row.insertCell(0);
                   playerNum.innerHTML=i;
 
                   var playerName = row.insertCell(1);
-                  playerName.innerHTML='<div class="ui left icon input"><input id="player' + i +'" type="text" placeholder="Player ' + i + '"/><i class="add user icon"></i></div>';
+                  playerName.innerHTML='<div id="player'+i+'div" class="ui left icon input"><input id="player' + i +'" type="text" placeholder="Player ' + i + '"/><i class="add user icon"></i></div>';
 
                   var isReader = row.insertCell(2);
-                  isReader.innerHTML = '<input name="reader" type="radio" value=""/>';
+                  isReader.innerHTML = '<input name="reader" id="player' + i + 'reader" type="radio" value=""/>';
 
               }
             }
