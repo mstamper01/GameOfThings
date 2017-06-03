@@ -1,0 +1,85 @@
+<html>
+<link rel="stylesheet" href="../semantic/dist/semantic.min.css">
+<link rel="stylesheet" href="../semantic/dist/semantic.min.js">
+<script src="../angular/angular.min.js"></script>
+<style>
+  body{
+          background-image: url('../pics/things_background.jpg');
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+      }
+  #logo{
+      margin:auto;
+      display: block;
+  }
+</style>
+  <title>Game of Things</title>
+
+  <body ng-app="gameApp">
+    <img id="logo" src="../pics/things_logo.png">
+    <div class="ui two columned inverted centered grid">
+      <div class="ui form raised padded segment">
+      <h4 class="ui dividing header">Number of Players</h4>
+      <div class="one field">
+          <label>Please enter the number of players:</label>
+          <input id="numOfPlayers" class="center aligned two wide field" type="text" placeholder="1" onkeyup="updatePlayers()">
+      </div>
+      <h4 class="ui dividing header">Players</h4>
+      <div class="centered field">
+          <label>Please enter the players name in the order they are sitting (and select a reader to start):</label>
+        <table class="ui striped selectable table" id="playersTable">
+          <tr class="center aligned"><th>#</th><th>Name</th><th>Reader</th></tr>
+          <tr class="center aligned">
+            <td>1</td>
+            <td><div class="ui left icon input"><input id="player1" type="text" placeholder="Player 1"/><i class="add user icon"></i></div></td>
+            <td><input name="reader" type="radio" checked="checked" value=""/></td>
+        </table>
+      </div>
+      <button class="ui olive button">
+          Play Game!
+      </button>
+    </div>
+  </div>
+  </body>
+  <script>
+    function updatePlayers()
+    {
+        var playersTable = document.getElementById('playersTable')
+        var currentNum = playersTable.rows.length-1; //-1 for the <th>'s
+        var numOfPlayers = document.getElementById('numOfPlayers').value;
+
+        if(!isNaN(numOfPlayers) && numOfPlayers > 1)
+        {
+            if(numOfPlayers > currentNum)
+            {
+              for(var i = currentNum+1; i<=numOfPlayers; i++)
+              {
+                  var row = playersTable.insertRow(playersTable.rows.length);
+                  row.className="center aligned"
+
+                  var playerNum = row.insertCell(0);
+                  playerNum.innerHTML=i;
+
+                  var playerName = row.insertCell(1);
+                  playerName.innerHTML='<div class="ui left icon input"><input id="player' + i +'" type="text" placeholder="Player ' + i + '"/><i class="add user icon"></i></div>';
+
+                  var isReader = row.insertCell(2);
+                  isReader.innerHTML = '<input name="reader" type="radio" value=""/>';
+
+              }
+            }
+            else if(numOfPlayers < currentNum)
+            {
+              for(var i = currentNum; i>numOfPlayers;i--)
+              {
+                playersTable.deleteRow(i);
+              }
+            }
+          document.getElementById('numOfPlayers').style.backgroundColor = "white";
+        }
+        else{
+          document.getElementById('numOfPlayers').style.backgroundColor = "red";
+        }
+    }
+  </script>
+</html>
